@@ -160,7 +160,7 @@ class PNGExport(inkex.Effect):
 
     def exportToPng(self, svg_path, output_path):
         area_param = '-D' if self.options.crop else '-C'
-        command = 'inkscape --shell ' + area_param + ' -d ' + str(self.options.dpi)  + ' --export-filename "' + output_path + '" "' + svg_path + '"'
+        command = '"C:\Program Files\Inkscape\bin\inkscape" ' + area_param + ' -d ' + str(self.options.dpi)  + ' --export-filename "' + output_path + '" "' + svg_path + '"'
         self.file.write (command)
         #os.system(command)
         #p = subprocess.Popen(
