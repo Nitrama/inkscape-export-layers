@@ -4,6 +4,7 @@
     <id>net.kaleidos.export.layers</id>
     <dependency type="executable" location="extensions">export_layers.py</dependency>
 	<param name="help" type="description">Export your file in different png files by layer</param>
+	<param name="inkpath" type="string"  _gui-text="Choose path to inkscape">inkscape.exe</param>
     <param name="path" type="string"  _gui-text="Choose path to export">~/</param>
     <param name="crop" type="bool" _gui-text="Crop to drawn bounds?">false</param>
     <param name="overwrite" type="bool" _gui-text="Overwrite Files?">true</param>

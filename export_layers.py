@@ -35,6 +35,7 @@ class PNGExport(inkex.Effect):
     def __init__(self):
         """init the effetc library and get options from gui"""
         inkex.Effect.__init__(self)
+        self.arg_parser.add_argument("--inkpath", action="store", type=str, dest="inkpath", default='inkscape.exe', help="")
         self.arg_parser.add_argument("--path", action="store", type=str, dest="path", default="~/", help="")
         self.arg_parser.add_argument("--crop", action="store", type=inkex.Boolean, dest="crop", default=False)
         self.arg_parser.add_argument("--overwrite", action="store", type=inkex.Boolean, dest="overwrite", default=True)
@@ -44,7 +45,7 @@ class PNGExport(inkex.Effect):
     def effect(self):
         self.file = write_file(self.options.path)
         output_path = os.path.expanduser(self.options.path)
-
+        self.file.write("inkpath:" + self.options.inkpath)
         self.file.write("path:" + self.options.path)
         self.file.write("crop:" + str(self.options.crop))
         self.file.write("overwrite:" + str(self.options.overwrite))
@@ -160,7 +161,8 @@ class PNGExport(inkex.Effect):
 
     def exportToPng(self, svg_path, output_path):
         area_param = '-D' if self.options.crop else '-C'
-        command = '"C:\Program Files\Inkscape\bin\inkscape" ' + area_param + ' -d ' + str(self.options.dpi)  + ' --export-filename "' + output_path + '" "' + svg_path + '"'
+        
+        command = '"'+self.options.inkpath +'" ' + area_param + ' -d ' + str(self.options.dpi)  + ' --export-filename "' + output_path + '" "' + svg_path + '"'
         self.file.write (command)
         #os.system(command)
         #p = subprocess.Popen(
